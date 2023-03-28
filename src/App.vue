@@ -25,6 +25,15 @@ const addTodo = () => {
     done: false,
     createdAt: new Date().getTime()
   })
+
+  // Reset the input field after entry
+  input_content.value = ''
+  input_category.value = null
+}
+
+// Delete Done Todo
+const removeTodo = (todo) => {
+  todos.value = todos.value.filter((t) => t !== todo)
 }
 
 watch(todos, (newVal) => {
@@ -88,6 +97,24 @@ onMounted(() => {
           </div>
           <input type="submit" value="Add todo" />
         </form>
+      </section>
+
+      <section class="todo-list">
+        <h3>TODO LIST</h3>
+        <div class="list">
+          <div v-for="todo in todos_asc" :class="`todo-item ${todo.done && 'done'}`">
+            <label>
+              <input type="checkbox" v-model="todo.done" />
+              <span :class="`bubble ${todo.category}`"></span>
+            </label>
+            <div class="todo-content">
+              <input type="text" v-model="todo.content" />
+            </div>
+            <div class="actions">
+              <button class="delete" @click="removeTodo(todo)">Delete</button>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
   </div>
