@@ -67,7 +67,7 @@ onMounted(() => {
         <h3>CREATE A TODO</h3>
         <form @submit.prevent="addTodo">
           <h4>What's on your todo list today?</h4>
-          <input type="text" placeholder="e.g. go to the market" v-model="input_content" />
+          <input type="text" placeholder="Read a novel" v-model="input_content" />
           <h4>Pick A Category</h4>
 
           <div class="options">
@@ -80,7 +80,7 @@ onMounted(() => {
                 v-model="input_category"
               />
               <span class="bubble business"></span>
-              <div>Business</div>
+              <div>Work</div>
             </label>
 
             <label>
