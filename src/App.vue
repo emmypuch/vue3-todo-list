@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/require-v-for-key -->
 <script setup lang="ts">
 import { ref, onMounted, computed, watch } from 'vue'
 
@@ -8,6 +9,7 @@ const input_content = ref('')
 const input_category = ref(null)
 
 const todos_asc = computed(() =>
+  // eslint-disable-next-line vue/no-side-effects-in-computed-properties
   todos.value.sort((a, b) => {
     return b.createdAt - a.createdAt
   })
@@ -32,7 +34,7 @@ const addTodo = () => {
 }
 
 // Delete Done Todo
-const removeTodo = (todo) => {
+const removeTodo = (todo: any) => {
   todos.value = todos.value.filter((t) => t !== todo)
 }
 
@@ -102,7 +104,7 @@ onMounted(() => {
       <section class="todo-list">
         <h3>TODO LIST</h3>
         <div class="list">
-          <div v-for="todo in todos_asc" :class="`todo-item ${todo.done && 'done'}`">
+          <div v-for="todo in todos_asc" :class="`todo-item ${todo.done && 'done'}`" :key="todo.id">
             <label>
               <input type="checkbox" v-model="todo.done" />
               <span :class="`bubble ${todo.category}`"></span>
@@ -119,5 +121,3 @@ onMounted(() => {
     </main>
   </div>
 </template>
-
-<style scoped></style>
